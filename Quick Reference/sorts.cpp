@@ -1,4 +1,4 @@
-// Quick access integer swap function
+// Function to swap two integers
 void swap(int *a, int *b)
 {
   int t=*b;
@@ -32,4 +32,56 @@ void HeapSort(int a[], int size)
   }
 }
 
-//
+// Insertion Sort
+void insertionSort(int a[], int size)
+{
+  int i,j;
+  for(i = 1 ; i < size ; ++i )
+  {
+    j=i;
+    while(j > 0 && a[j] < a[j-1] )
+    {
+      swap(&a[j],&a[j-1]);
+      --j;
+    }
+  }
+}
+
+// Quick Sort
+int partition(int a[], int lb, int ub)
+{
+  int low=lb,high=ub,pivot=a[lb];
+  while(low<high){
+    while(a[low] <= pivot && low < ub)
+      ++low;
+    while(a[high] > pivot)
+      --high;
+    if(low<high)
+      swap(&a[high],&a[low]);
+  }
+  swap(&a[lb],&a[high]);
+  return high;
+}
+void QuickSort(int a[], int lb, int ub)
+{
+  if(lb >= ub)
+    return;
+  int part=partition(a,lb,ub);
+  QuickSort(a,lb,part-1);
+  QuickSort(a,part+1,ub);
+  return;
+}
+
+// Selection Sort
+void selectionSort(int a[], int size)
+{
+  int min=0,i,j;
+  for(i = 0 ; i < size ; ++i )
+  {
+    min = i;
+    for(j = i + 1 ; j < size ; ++j)
+      min=a[min]<a[j]?min:j;
+    if(min != i)
+      swap( &a[min] , &a[i] );
+  }
+}
